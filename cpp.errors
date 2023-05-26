@@ -1,0 +1,8 @@
+./skel/supercomputer/supercomputer.cpp:20:  Missing space before ( in for(  [whitespace/parens] [5]
+./skel/supercomputer/supercomputer.cpp:25:  Missing space before ( in for(  [whitespace/parens] [5]
+Done processing ./_utils/verif.cpp
+Done processing ./skel/ferate/ferate.cpp
+Done processing ./skel/magazin/magazin.cpp
+Done processing ./skel/supercomputer/supercomputer.cpp
+Done processing ./skel/teleportare/teleportare.cpp
+Total errors found: 2
