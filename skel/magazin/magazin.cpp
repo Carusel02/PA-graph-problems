@@ -1,97 +1,91 @@
 #include <bits/stdc++.h>
+#define MAX_NODE 100000
 using namespace std;
 
-class Task
-{
+
+class Task {
+
 public:
-    void solve()
-    {
-        read_input();
-        // vector<int> result = dfs(1); // Start DFS from node 1
-        // unordered_map<int, int> descendantCount = countDescendants(result); // Count descendants for each node
-        // print_output(descendantCount);
+    void solve() {    
+        solve_task();
     }
 
 private:
-    static constexpr int NMAX = (int)1e5 + 5; // 10^5 + 5 = 100,005
+    
+    /* N = number of nodes, Q = number of questions */
     int N, Q;
-    vector<int> adj[NMAX];
-    vector<int> parents;
-    unordered_map<int, int> hashmap;
 
-    void create_hashmap(const vector<int> &dfsTraversal)
-    {
-        for (int i = 0; i < dfsTraversal.size(); ++i)
-        {
-            hashmap[dfsTraversal[i]] = i;
-        }
-    }
+    /* adj[node] = adj list */
+    vector<int> adj[MAX_NODE];
 
-
-    void read_input()
-    {
+    /* resolve task */
+    void solve_task(void) {
+        
+        /* open file for tests */
         ifstream fin("magazin.in");
         ofstream fout("magazin.out");
+        /* read N and Q */
         fin >> N >> Q;
 
-        parents.resize(N + 1);
-
-        for (int i = 2, u; i <= N; i++)
-        {
+        /* read adj list */
+        for (int i = 2, u; i <= N; i++) {
             fin >> u;
             if (u == 1)
                 adj[1].push_back(i);
             else
                 adj[u].push_back(i);
-
-            parents[i] = u;
         }
 
+        /* reverse for correct order */
         for (int i = 1; i <= N; i++)
-        {
             reverse(adj[i].begin(), adj[i].end());
-        }
+        
+        /* store DFS in result starting from 0 */
+        int *result = dfs(1);
+        
+        /* create hashmap = position */
+        int *hashmap = new int[N + 1];
+        for (int i = 0; i < N; i++)
+            hashmap[result[i]] = i;
+        
+        /* number of each descendants for every node */
+        int  *descendantCount = countDescendants(result); 
 
-        vector<int> result = dfs(1); // Start DFS from node 1
-        unordered_map<int, int> descendantCount = countDescendants(result); // Count descendants for each node
-        create_hashmap(result);
-        // print_output(descendantCount);
-        // print_vector_output(result);
-
-         for (int i = 0, D, E; i < Q; ++i)
-        {
+        /* read questions */
+        for (int i = 0, D, E; i < Q; i++) {
 
             fin >> D >> E;
 
-            // Accessing the hashmap
-            if (hashmap.count(D) != 0) {
-                int position = hashmap[D];
-                if (position + E < result.size() && E <= descendantCount[D])
-                    fout << result[position + E] << "\n";
-                else
-                    fout << "-1\n";
-            } else {
-                fout << "Key not found\n";
-            }
+            int position = hashmap[D];
+            if (position + E < N && E <= descendantCount[D])
+                fout << result[position + E] << "\n";
+            else
+                fout << "-1\n";
         }
 
+        delete[] descendantCount;
+        delete[] result;
+        delete[] hashmap;
         fin.close();
+        fout.close();
     }
 
-    vector<int> dfs(int startNode)
-    {
-        vector<int> dfsTraversal; // To store the DFS traversal
-        vector<bool> visited(N + 1, false);
+    /* calculate DFS */
+    int *dfs(int startNode) {   
+        /* store DFS traversal */
+        int *dfsTraversal = new int[N + 1];
+        int *visited = new int[N + 1];
         stack<int> st;
 
         st.push(startNode);
         visited[startNode] = true;
 
-        while (!st.empty())
-        {
+        int count = 0;
+
+        while (!st.empty()) {
             int currNode = st.top();
             st.pop();
-            dfsTraversal.push_back(currNode);
+            dfsTraversal[count++] = currNode;
 
             for (int neigh : adj[currNode])
             {
@@ -103,14 +97,15 @@ private:
             }
         }
 
+        delete[] visited;
         return dfsTraversal;
     }
 
-    unordered_map<int, int> countDescendants(const vector<int> &dfsTraversal)
+    int *countDescendants(int *dfsTraversal)
     {
-        unordered_map<int, int> descendantCount;
+        int *descendantCount = new int[N + 1];
 
-        for (int i = dfsTraversal.size() - 1; i >= 0; --i)
+        for (int i = N - 1; i >= 0; --i)
         {
             int node = dfsTraversal[i];
             int count = 0;
@@ -124,36 +119,10 @@ private:
         return descendantCount;
     }
 
-    void print_output(const unordered_map<int, int> &descendantCount)
-    {
-        ofstream fout("magazin.out");
-        for (const auto& [node, count] : descendantCount)
-        {
-            fout << "Node " << node << ": Descendants = " << count << "\n";
-        }
-        fout.close();
-    }
-
-    void print_vector_output(const vector<int> &vector)
-    {
-        ofstream fout("magazin.out");
-        for (int i = 0 ; i < vector.size(); ++i)
-        {
-            fout << vector[i] << " ";
-        }
-
-        fout.close();
-    }
 };
 
-int main()
-{
+int main() {
     auto *task = new (nothrow) Task();
-    if (!task)
-    {
-        cerr << "new failed: WTF are you doing? Throw your PC!\n";
-        return -1;
-    }
     task->solve();
     delete task;
     return 0;
