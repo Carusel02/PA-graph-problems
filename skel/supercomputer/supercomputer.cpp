@@ -1,82 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Task
-{
-public:
-    void solve()
-    {   
+class Task {
+ public:
+    /* solve task */
+    void solve() {
+        /* read input */
         read_input();
+        /* store results */
         int resultA = startA(inDegree, datasets);
         int resultB = startB(inDegree, datasets);
-
-        if(resultA < resultB)
-            print_output(resultA);
-        else
-            print_output(resultB);
-
+        /* find min */
+        print_output(min(resultA, resultB));
     }
 
-private:
-    // numarul maxim de noduri
-    static constexpr int NMAX = (int)1e5 + 5; // 10^5 + 5 = 100.005
-
-    // n = numar de noduri, m = numar de muchii/arce
+ private:
+    /* max node */
+    static constexpr int NMAX = (int)1e5 + 5;
     int n, m;
 
-    // adj[node] = lista de adiacenta a nodului node
-    // exemplu: daca adj[node] = {..., neigh, ...} => exista arcul (node, neigh)
     vector<int> adj[NMAX];
-    vector<int> inDegree; // numarul de muchii de intrare pentru fiecare nod
-    vector<int> datasets; // dataset[node] = setul de date al nodului node
+    vector<int> inDegree;
+    vector<int> datasets;
 
-    // citire date de intrare
-    void read_input()
-    {
+    /* open file and read input data */
+    void read_input() {
         ifstream fin("supercomputer.in");
         fin >> n >> m;
         inDegree.resize(n + 1, 0);
         datasets.resize(n + 1);
         for (int i = 1; i <= n; i++)
-        {
             fin >> datasets[i];
-        }
-        for (int i = 1, u, v; i <= m; i++)
-        {
-            fin >> u >> v; // arc (x, y)
+        for (int i = 1, u, v; i <= m; i++) {
+            fin >> u >> v;
             adj[u].push_back(v);
             inDegree[v]++;
         }
         fin.close();
     }
 
-    // calculare topological sort
-    int startA(vector<int> inDegree, const vector<int>& datasets)
-    {
+    /* calculate sets starting from A */
+    int startA(vector<int> inDegree, const vector<int>& datasets) {
         vector<int> topsort;
         queue<int> A, B;
+        int context = 0;
 
-        int result = 0;
-
-        // for every node with inDegree = 0 and dataset = 1 / 2
-        for (int i = 1; i <= n; i++)
-        {   
+        /* topological sort */
+        for (int i = 1; i <= n; i++) {
             if (inDegree[i] == 0 && datasets[i] == 1)
                 A.push(i);
             if (inDegree[i] == 0 && datasets[i] == 2)
                 B.push(i);
-            
         }
 
-        while (!A.empty() || !B.empty())
-        {
-            while (!A.empty())
-            {
+        /* both queues empty */
+        while (!A.empty() || !B.empty()) {
+            /* free first */
+            while (!A.empty()) {
                 int node = A.front();
                 A.pop();
                 topsort.push_back(node);
-                for (int neighbor : adj[node])
-                {
+                for (int neighbor : adj[node]) {
                     inDegree[neighbor]--;
                     if (inDegree[neighbor] == 0 && datasets[neighbor] == 1)
                         A.push(neighbor);
@@ -86,80 +70,72 @@ private:
                 }
             }
 
+            /* next dates */
             if (!B.empty())
-                result++;
+                context++;
 
-            while (!B.empty())
-            {
+            /* free second */
+            while (!B.empty()) {
                 int node = B.front();
                 B.pop();
                 topsort.push_back(node);
-                for (int neighbor : adj[node])
-                {
+                for (int neighbor : adj[node]) {
                     inDegree[neighbor]--;
                     if (inDegree[neighbor] == 0 && datasets[neighbor] == 1)
                         A.push(neighbor);
-                
                     if (inDegree[neighbor] == 0 && datasets[neighbor] == 2)
                         B.push(neighbor);
-                    
                 }
             }
 
+            /* next dates */
             if (!A.empty())
-                result++;
+                context++;
         }
 
-        return result;
+        return context;
     }
 
-    int startB(vector<int> inDegree, const vector<int>& datasets)
-    {
+    /* calculate sets starting from B */
+    int startB(vector<int> inDegree, const vector<int>& datasets) {
         vector<int> topsort;
         queue<int> A, B;
+        int context = 0;
 
-        int result = 0;
-
-        // for every node with inDegree = 0 and dataset = 1 / 2
-        for (int i = 1; i <= n; i++)
-        {   
+        /* topological sort */
+        for (int i = 1; i <= n; i++) {
             if (inDegree[i] == 0 && datasets[i] == 1)
                 A.push(i);
-            
             if (inDegree[i] == 0 && datasets[i] == 2)
                 B.push(i);
-            
         }
 
-        while (!A.empty() || !B.empty())
-        {
-            while (!B.empty())
-            {
+        /* both queues empty*/
+        while (!A.empty() || !B.empty()) {
+            /* free first */
+            while (!B.empty()) {
                 int node = B.front();
                 B.pop();
                 topsort.push_back(node);
-                for (int neighbor : adj[node])
-                {
+                for (int neighbor : adj[node]) {
                     inDegree[neighbor]--;
                     if (inDegree[neighbor] == 0 && datasets[neighbor] == 1)
                         A.push(neighbor);
-                
                     if (inDegree[neighbor] == 0 && datasets[neighbor] == 2)
                         B.push(neighbor);
-                    
                 }
             }
 
+            /* next dates */
             if (!A.empty())
-                result++;
+                context++;
 
-            while (!A.empty())
-            {
+            /* free second */
+            while (!A.empty()) {
                 int node = A.front();
                 A.pop();
                 topsort.push_back(node);
-                for (int neighbor : adj[node])
-                {
+                for (int neighbor : adj[node]) {
                     inDegree[neighbor]--;
                     if (inDegree[neighbor] == 0 && datasets[neighbor] == 1)
                         A.push(neighbor);
@@ -169,13 +145,15 @@ private:
                 }
             }
 
+            /* next dates */
             if (!B.empty())
-                result++;
+                context++;
         }
 
-        return result;
+        return context;
     }
 
+    /* open file and print output */
     void print_output(int result) {
         ofstream fout("supercomputer.out");
         fout << result << '\n';
@@ -183,20 +161,8 @@ private:
     }
 };
 
-// [ATENTIE] NU modifica functia main!
-int main()
-{
-    // * se aloca un obiect Task pe heap
-    // (se presupune ca e prea mare pentru a fi alocat pe stiva)
-    // * se apeleaza metoda solve()
-    // (citire, rezolvare, printare)
-    // * se distruge obiectul si se elibereaza memoria
-    auto *task = new (nothrow) Task(); // hint: cppreference/nothrow
-    if (!task)
-    {
-        cerr << "new failed: WTF are you doing? Throw your PC!\n";
-        return -1;
-    }
+int main() {
+    auto *task = new (nothrow) Task();
     task->solve();
     delete task;
     return 0;

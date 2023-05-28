@@ -14,25 +14,24 @@ using namespace std;
 
 
 int main() {
-    ifstream fin("magazin.in");
-    ofstream fout("magazin.out");
+    ifstream fin("teleportare.in");
+    ofstream fout("teleportare.out");
 
-    int N, Q;
-    fin >> N >> Q;
+    /* read N (number of cars) and K (number of feribots) */
+    int N, M, K;
+    fin >> N >> M >> K;
 
-    for(int i = 0; i < N - 1; ++i) {
-        int x;
-        fin >> x;
-    }
-    for(int i = 0; i < Q; ++i) {
-        int d, e;
-        fin >> d >> e;
-        fout << 0 << '\n';
+    for(int i = 0; i < M; ++i) {
+        int x, y, t;
+        fin >> x >> y >> t;
     }
 
+    for(int i = 0; i < K; ++i) {
+        int x, y, p;
+        fin >> x >> y >> p;
+    }
 
-
-
+    fout << 0;
 
     return 0;
 }

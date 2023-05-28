@@ -1,0 +1,22 @@
+README TEMA2 "Gigel, mereu ocupat"
+
+Implementare:
+# Supercomputer
+Ideea de rezolvare este folosirea algoritmului de TOPOLOGICAL SORT,
+pe care l-am preluat din LABORATOR, impartind coada principala in
+2 cozi pentru fiecare set de date. Astfel, se adauga in cozi nodurile
+care au grad 0 initial, si se aplica algoritmul. Dupa ce se goleste o
+coada, se verifica daca cealalta nu e goala, analog si pentru cealalta.
+Dacac nu s-a golit, inseamna ca urmeaza un nou set de date diferit si
+se incrementeaza nr de context switch uri.
+# Cai ferate
+Ideea de rezolvare este folosirea algoritmului lui TARJAN preluat din
+LABORATOR, deoarece putem sa ne folosim de componentele tare conexe care
+rezulta din acesta in urmatorul fel :
+- daca componenta tare conexa este formata dintr un nod, verificam daca
+putem ajunge deja la el, daca nu, adaugam un drum catre acesta
+- daca componenta tare conexa este formata din mai multe noduri, verificam
+daca exista un nod exterior care are drum catre unul din nodurile componente
+Astfel, se determina numarul final de drumuri care trebuiesc adaugate.
+# Magazin
+

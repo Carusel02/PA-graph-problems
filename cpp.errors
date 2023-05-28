@@ -1,8 +1,41 @@
-./skel/supercomputer/supercomputer.cpp:20:  Missing space before ( in for(  [whitespace/parens] [5]
-./skel/supercomputer/supercomputer.cpp:25:  Missing space before ( in for(  [whitespace/parens] [5]
+./skel/magazin/magazin.cpp:7:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+./skel/magazin/magazin.cpp:8:  public: should be indented +1 space inside class Task  [whitespace/indent] [3]
+./skel/magazin/magazin.cpp:9:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:13:  private: should be indented +1 space inside class Task  [whitespace/indent] [3]
+./skel/magazin/magazin.cpp:14:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:14:  Do not leave a blank line after "private:"  [whitespace/blank_line] [3]
+./skel/magazin/magazin.cpp:23:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:23:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+./skel/magazin/magazin.cpp:42:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:45:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:50:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:52:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:56:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+./skel/magazin/magazin.cpp:74:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/magazin/magazin.cpp:91:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./skel/magazin/magazin.cpp:93:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./skel/magazin/magazin.cpp:105:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./skel/magazin/magazin.cpp:109:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./skel/magazin/magazin.cpp:113:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./skel/magazin/magazin.cpp:121:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+./skel/teleportare/teleportare.cpp:18:  public: should be indented +1 space inside class Task  [whitespace/indent] [3]
+./skel/teleportare/teleportare.cpp:24:  private: should be indented +1 space inside class Task  [whitespace/indent] [3]
+./skel/teleportare/teleportare.cpp:36:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/teleportare/teleportare.cpp:57:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
+./skel/teleportare/teleportare.cpp:58:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./skel/teleportare/teleportare.cpp:60:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./skel/teleportare/teleportare.cpp:66:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./skel/teleportare/teleportare.cpp:72:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./skel/teleportare/teleportare.cpp:78:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./skel/teleportare/teleportare.cpp:97:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./skel/teleportare/teleportare.cpp:97:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+./skel/teleportare/teleportare.cpp:141:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./skel/teleportare/teleportarebasic.cpp:24:  Missing space before ( in for(  [whitespace/parens] [5]
+./skel/teleportare/teleportarebasic.cpp:29:  Missing space before ( in for(  [whitespace/parens] [5]
 Done processing ./_utils/verif.cpp
 Done processing ./skel/ferate/ferate.cpp
 Done processing ./skel/magazin/magazin.cpp
 Done processing ./skel/supercomputer/supercomputer.cpp
 Done processing ./skel/teleportare/teleportare.cpp
-Total errors found: 2
+Done processing ./skel/teleportare/teleportarebasic.cpp
+Total errors found: 34
